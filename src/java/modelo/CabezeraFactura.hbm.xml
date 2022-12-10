@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 6, 2022 12:08:01 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.CabezeraFactura" table="cabezera_factura" schema="public" optimistic-lock="version">
+        <id name="idCabezeraFactura" type="int">
+            <column name="id_cabezera_factura" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="direccion" class="modelo.Direccion" fetch="select">
+            <column name="id_direccion" />
+        </many-to-one>
+        <many-to-one name="pago" class="modelo.Pago" fetch="select">
+            <column name="id_pago" />
+        </many-to-one>
+        <set name="detalleFacturas" table="detalle_factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cabezera_factura" />
+            </key>
+            <one-to-many class="modelo.DetalleFactura" />
+        </set>
+    </class>
+</hibernate-mapping>

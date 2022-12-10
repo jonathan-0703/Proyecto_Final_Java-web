@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./adminTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content">
+        <h:form id="frmConsultar">
+                
+            <p:dataTable id="dtConsulta" var="cl" value="#{mbProducto.listProducto}">
+
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{cl.idProducto}"/>
+
+                            </p:column>
+
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{cl.nombre}"/>
+
+                            </p:column>
+
+
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{cl.descripcion}"/>
+
+                            </p:column>   
+
+                            <p:column headerText="Precio_Unitario">
+                                <h:outputText value="#{cl.precioUnitario}"/>
+
+                            </p:column>
+
+                            <p:column headerText="Imagen">
+                                <p:graphicImage library="imagen" name="#{cl.imagennombre}" style="height: 300px"/>
+
+                            </p:column>
+
+                            <p:column headerText="stock">
+                                <h:outputText value="#{cl.stock}"/>
+
+                            </p:column>
+
+                            <p:column headerText="Marca">
+                                <h:outputText value="#{cl.marca.descripcion}"/>
+
+                            </p:column>
+
+                            <p:column headerText="Proveedor">
+                                <h:outputText value="#{cl.proveedor.nombre}"/>
+
+                            </p:column>
+
+                            <p:column headerText="Categoria">
+                                <h:outputText value="#{cl.categoria.descripcion}"/>
+
+                            </p:column>
+                
+                                                         <p:column headerText=".......">
+                            <p:growl id="growl_modi" showDetail="true"/>
+                            <p:commandButton  value="Modificar" 
+                                              oncomplete="PF('dlgModificar').show()" 
+                                              update=":frmModificar">
+                                <f:setPropertyActionListener target="#{mbProducto.obj_producto}" value="#{cl}"/>
+                            </p:commandButton>
+                            </p:column>
+                                <p:column headerText="........">
+                                <p:growl id="growl_elim" showDetail="true"/>
+                                <p:commandButton  value="Eliminar" 
+                                                  oncomplete="PF('dlgEliminar').show()" 
+                                                  update=":frmEliminar">
+                                    <f:setPropertyActionListener target="#{mbProducto.obj_producto}" value="#{cl}"/>
+                                 </p:commandButton>    
+                                </p:column>
+
+                          </p:dataTable>
+          </h:form>    
+        
+                            <p:dialog id="dlgModificar" minWidth="300" widgetVar="dlgModificar" 
+                            resizable="true" modal="true" header="Modificar Clientes" 
+                            showEffect="explode" hideEffect="explode">
+                         
+                                <h:form id="frmModificar">
+                                <h:panelGrid id="pngModificarProducto" columns="3" >
+
+                                    <p:growl id="messages" showDetail="true"/>
+                                    <p:outputLabel value="Codigo" />
+                                    <h:inputText class="form-control"  value="#{mbProducto.obj_producto.idProducto}" id="txtIdProducto_m" required="true"/>
+                                    <p:message for="txtIdProducto_m"/>
+
+                                    <p:outputLabel value="Nombre"/>
+                                    <h:inputText class="form-control"  value="#{mbProducto.obj_producto.nombre}" id="txtNombre_m" required="true"/>
+                                    <p:message for="txtNombre_m"/>
+
+                                    <p:outputLabel value="Descripcion"/>
+                                    <h:inputText class="form-control"  value="#{mbProducto.obj_producto.descripcion}" id="txtDescripcionProducto_m" required="true"/>
+                                    <p:message for="txtDescripcionProducto_m"/>
+
+                                    <p:outputLabel value="Precio Unitario"/>
+                                    <h:inputText class="form-control" value="#{mbProducto.obj_producto.precioUnitario}"  id="txtPrecio_m" required="true"/>
+                                    <p:message for="txtPrecio_m"/>
+
+                                    <p:outputLabel value="Stock"/>
+                                    <h:inputText class="form-control" value="#{mbProducto.obj_producto.stock}"  id="txtStock_m" required="true"/>
+                                    <p:message for="txtStock_m"/>
+
+                                   <p:outputLabel value="Marca"/>
+                                   <h:selectOneMenu  class="form-control"  id="cboMarca_m" required="true" value="#{mbProducto.obj_producto.marca.idMarca}">
+                                        <f:selectItem itemLabel="--Seleccionar"/>
+                                        <f:selectItems value="#{mbMarca.lstMarca}" var="m" 
+                                                       itemLabel="#{m.descripcion}" itemValue="#{m.idMarca}"/>                            
+                                    </h:selectOneMenu>
+                                    <p:message for="cboMarca_m"/>
+
+                                    <p:outputLabel value="Proveedor"/>
+                                    <h:selectOneMenu  class="form-control"  id="cboProveedor_m" required="true" value="#{mbProducto.obj_producto.proveedor.idProveedor}">
+                                        <f:selectItem itemLabel="--Seleccionar"/>
+                                        <f:selectItems value="#{mbProovedor.lstProveedor}" var="pr" 
+                                                       itemLabel="#{pr.nombre}" itemValue="#{pr.idProveedor}"/>    
+                                    </h:selectOneMenu>
+                                    <p:message for="cboProveedor_m"/>
+
+
+                                    <p:outputLabel value="Categoria"/>
+                                    <h:selectOneMenu  class="form-control"  id="cboCategoria_m" required="true" value="#{mbProducto.obj_producto.categoria.idCategoria}">
+                                        <f:selectItem itemLabel="--Seleccionar"/>
+                                        <f:selectItems value="#{mbCategoria.lstCategoria}" var="ct" 
+                                                       itemLabel="#{ct.descripcion}" itemValue="#{ct.idCategoria}"/>                                
+                                    </h:selectOneMenu>    
+                                    <p:message for="cboCategoria_m"/>
+                                           <p:commandButton icon="ui-icon-refresh" value="Modificar" 
+                                                            actionListener="#{mbProducto.modificarProducto()}" 
+                                                    update=":frmConsultar" 
+                                                    oncomplete="PF('dlgModificar').hide()"/>
+                                   </h:panelGrid>
+
+
+                            </h:form>
+                        </p:dialog> 
+        
+                        <p:dialog id="dlgEliminar" widgetVar="dlgEliminar" showEffect="explode" modal="true" minWidth="200"
+                                    resizable="false">
+            
+                        <h:form id="frmEliminar">
+
+                            <p:outputLabel value="Desea eliminar el cliente con id: #{mbProducto.obj_producto.idProducto}"/>
+                            <p:commandButton icon="ui_icon-check" value="SI" 
+                                             actionListener="#{mbProducto.eliminarCategoria()}" 
+                                             update=":frmConsultar"
+                                             oncomplete="PF('dlgEliminar').hide()"/>  
+
+                            <p:commandButton icon="ui-icon-trash" value="NO" 
+                                             onclick="PF('dlgEliminar').hide()"/> 
+                    
+                         </h:form>
+                     </p:dialog>
+    </ui:define>
+
+</ui:composition>

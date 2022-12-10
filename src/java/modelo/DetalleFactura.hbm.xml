@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 6, 2022 12:08:01 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.DetalleFactura" table="detalle_factura" schema="public" optimistic-lock="version">
+        <id name="idDetalleFactura" type="int">
+            <column name="id_detalle_factura" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cabezeraFactura" class="modelo.CabezeraFactura" fetch="select">
+            <column name="id_cabezera_factura" />
+        </many-to-one>
+        <many-to-one name="producto" class="modelo.Producto" fetch="select">
+            <column name="id_producto" />
+        </many-to-one>
+        <property name="total" type="double">
+            <column name="total" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="iva" type="double">
+            <column name="iva" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="subtotal" type="double">
+            <column name="subtotal" precision="17" scale="17" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Administracion</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputScript library="js" name="bootstrap.min.js"/>   
+    </h:head>
+
+    <h:body>
+
+
+        <div id="top" class="top">
+            <ui:insert name="top">
+            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+                <a class="navbar-brand ps-3">Panel de administración</a>
+                <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">                
+                    <div class="input-group">
+                        <h:link class="btn btn-primary btn-block" value = "Ver mi pagina" outcome = "indexTemplate"/>
+                    </div>
+                </form>
+                <!-- Navbar-->
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <h:link class="btn btn-secondary" value = "Salir" outcome = "login"/>
+                </ul>
+            </nav>                
+                
+            </ui:insert>
+        </div>
+       <div class="row">
+            <div id="left" class="col-sm-2">
+                <ui:insert name="left">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 220px; position:absolute; height: 100%;">
+                         <a href="#!" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                           <span class="fs-4">Menu</span>
+                         </a>
+                         <hr/>
+                         <ul class="nav nav-pills flex-column mb-auto text-white text-decoration-none">
+                             <li>
+                                 <h:link class="nav-link text-white" value = "Inicio" outcome = "adminTemplate"  />
+
+                             </li>
+
+                             <li>
+                                 <h:link class="nav-link text-white" value = "Productos" outcome = "adminProducto" />
+                             </li>
+                              <li>
+                                 <h:link class="nav-link text-white" value = "Usuarios" outcome = "adminUsuarios" />
+                             </li>
+                             <li>
+                                 <h:link class="nav-link text-white" value = "Proveedores" outcome = "adminProveedores" />
+                             </li>
+                             <li>
+                                 <h:link class="nav-link text-white" value = "Categorias" outcome = "adminCategoria" />
+                             </li>
+                             
+                         </ul>
+                     </div> 
+                </ui:insert>
+            </div>
+            <div id="content" class="col-8 p-4">
+                <ui:insert name="content">Inicio</ui:insert>
+            </div>
+        </div>
+    </h:body>
+
+</html>

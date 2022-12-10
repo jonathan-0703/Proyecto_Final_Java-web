@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./adminTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputScript library="js" name="bootstrap.min.js"/>
+    
+        <ui:define name="content">
+          
+                 <h4>CATEGORIAS</h4>
+                  <h:form id="frmCategoria" >
+                  <div class="p-3 ">
+                        <h:panelGrid id="pngIngresarCatalogo" columns="3" >
+                            <p:outputLabel value="Codigo" />
+                            <h:inputText class="form-control"  id="txtId" value="#{mbCategoria.obj_Categoria.idCategoria}" required="true"/>
+                            <p:message for="txtId"/>
+                            <p:outputLabel value="Descripcion "/>
+                            <h:inputText class="form-control"  id="txtDescripcion" value="#{mbCategoria.obj_Categoria.descripcion}" required="true"/>
+                            <p:message for="txtDescripcion"/>
+                        </h:panelGrid>   
+                  </div>
+                    <div class="p-3">
+                       <p:commandButton icon="ui-icon-plusthick" value="Ingresar" 
+                                        actionListener="#{mbCategoria.agregarCategoria()}"
+                                  update=":frmCategoria :frmConsultar"/>
+      
+                    </div>
+                  </h:form>    
+                      
+                 <div class="p-4">
+                     <div class="site-blocks-table">
+                        <h:form id="frmConsultar">
+                            <p:dataTable id="dtConsulta" value="#{mbCategoria.lstCategoria}" var="cl">
+
+                            <p:column headerText="Codigo">
+                                 <h:outputText value="#{cl.idCategoria}"/>
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{cl.descripcion}"/>
+                            </p:column> 
+                             <p:column headerText=".......">
+                            <p:growl id="growl_modi" showDetail="true"/>
+                            <p:commandButton  value="Modificar" 
+                                              oncomplete="PF('dlgModificar').show()" 
+                                              update=":frmModificar">
+                                <f:setPropertyActionListener target="#{mbCategoria.obj_Categoria}" value="#{cl}"/>
+                            </p:commandButton>
+                            </p:column>
+                                <p:column headerText="........">
+                                <p:growl id="growl_elim" showDetail="true"/>
+                                <p:commandButton  value="Eliminar" 
+                                                  oncomplete="PF('dlgEliminar').show()" 
+                                                  update=":frmEliminar">
+                                    <f:setPropertyActionListener target="#{mbCategoria.obj_Categoria}" value="#{cl}"/>
+                                 </p:commandButton>    
+                                </p:column>
+
+                          </p:dataTable>
+                        </h:form> 
+                         
+                        <p:dialog id="dlgModificar" minWidth="300" widgetVar="dlgModificar" 
+                           resizable="true" modal="true" header="Modificar Clientes" 
+                            showEffect="explode" hideEffect="explode">
+                         
+                                <h:form id="frmModificar">
+                                <h:panelGrid id="pngModificarCatalogo" columns="3" >
+                                   <p:outputLabel value="Codigo" />
+                                   <h:inputText class="form-control"  id="txtId_m" value="#{mbCategoria.obj_Categoria.idCategoria}" required="true"/>
+                                   <p:message for="txtId_m"/>
+                                   <p:outputLabel value="Descripcion "/>
+                                   <h:inputText class="form-control"  id="txtDescripcion_m" value="#{mbCategoria.obj_Categoria.descripcion}" required="true"/>
+                                   <p:message for="txtDescripcion_m"/>
+                                   <p:commandButton icon="ui-icon-refresh" value="Modificar" 
+                                                    actionListener="#{mbCategoria.modificarCategoria()}" 
+                                            update=":frmConsultar" 
+                                            oncomplete="PF('dlgModificar').hide()"/>
+                           </h:panelGrid>
+
+
+                            </h:form>
+                        </p:dialog> 
+                         
+                         <p:dialog id="dlgEliminar" widgetVar="dlgEliminar" showEffect="explode" modal="true" minWidth="200"
+                                    resizable="false">
+            
+                        <h:form id="frmEliminar">
+
+                            <p:outputLabel value="Desea eliminar el cliente con id: #{mbCategoria.obj_Categoria.idCategoria}"/>
+                            <p:commandButton icon="ui_icon-check" value="SI" 
+                                             actionListener="#{mbCategoria.eliminarCategoria()}" 
+                                             update=":frmConsultar"
+                                             oncomplete="PF('dlgEliminar').hide()"/>  
+
+                            <p:commandButton icon="ui-icon-trash" value="NO" 
+                                             onclick="PF('dlgEliminar').hide()"/> 
+                    
+                         </h:form>
+                     </p:dialog>
+                         
+                         
+                         
+                         
+                     </div>
+
+
+                     
+                </div>
+          
+    </ui:define>
+
+</ui:composition>

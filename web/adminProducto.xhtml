@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./adminTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content">
+        <h4>CRUD PRODUCTOS</h4>
+                <h:form id="frmProducto" enctype="multipart/form-data">
+                    <div class="p-3">
+                        <!--INPUTS -->
+
+                        <h:panelGrid id="pngIngresarProducto" columns="3">
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:outputLabel value="Codigo" />
+                            <h:inputText class="form-control"  value="#{mbProducto.obj_producto.idProducto}" id="txtIdProducto" required="true"/>
+                            <p:message for="txtIdProducto"/>
+
+                            <p:outputLabel value="Nombre"/>
+                            <h:inputText class="form-control"  value="#{mbProducto.obj_producto.nombre}" id="txtNombre" required="true"/>
+                            <p:message for="txtNombre"/>
+                            
+                            <p:outputLabel value="Descripcion"/>
+                            <h:inputText class="form-control"  value="#{mbProducto.obj_producto.descripcion}" id="txtDescripcionProducto" required="true"/>
+                            <p:message for="txtDescripcionProducto"/>
+                            
+                            <p:outputLabel value="Precio Unitario"/>
+                            <h:inputText class="form-control" value="#{mbProducto.obj_producto.precioUnitario}"  id="txtPrecio" required="true"/>
+                            <p:message for="txtPrecio"/>
+                            
+                            <p:outputLabel value="Imagen"/>
+                            <p:fileUpload value="#{mbProducto.archivo}" id="fileImagen" mode="simple" update="messages" skinSimple="true" accept=".png, .jpg"/>
+                            <p:message for="fileImagen"/>
+                            
+                            
+                            <p:outputLabel value="Stock"/>
+                            <h:inputText class="form-control" value="#{mbProducto.obj_producto.stock}"  id="txtStock" required="true"/>
+                            <p:message for="txtStock"/>
+                            
+                           <p:outputLabel value="Marca"/>
+                           <h:selectOneMenu  class="form-control"  id="cboMarca" required="true" value="#{mbProducto.obj_producto.marca.idMarca}">
+                                <f:selectItem itemLabel="--Seleccionar"/>
+                                <f:selectItems value="#{mbMarca.lstMarca}" var="m" 
+                                               itemLabel="#{m.descripcion}" itemValue="#{m.idMarca}"/>                            
+                            </h:selectOneMenu>
+                            <p:message for="cboMarca"/>
+
+                            <p:outputLabel value="Proveedor"/>
+                            <h:selectOneMenu  class="form-control"  id="cboProveedor" required="true" value="#{mbProducto.obj_producto.proveedor.idProveedor}">
+                                <f:selectItem itemLabel="--Seleccionar"/>
+                                <f:selectItems value="#{mbProovedor.lstProveedor}" var="pr" 
+                                               itemLabel="#{pr.nombre}" itemValue="#{pr.idProveedor}"/>    
+                            </h:selectOneMenu>
+                            <p:message for="cboProveedor"/>
+
+
+                            <p:outputLabel value="Categoria"/>
+                            <h:selectOneMenu  class="form-control"  id="cboCategoria" required="true" value="#{mbProducto.obj_producto.categoria.idCategoria}">
+                                <f:selectItem itemLabel="--Seleccionar"/>
+                                <f:selectItems value="#{mbCategoria.lstCategoria}" var="ct" 
+                                               itemLabel="#{ct.descripcion}" itemValue="#{ct.idCategoria}"/>                                
+                            </h:selectOneMenu>    
+                            <p:message for="cboCategoria"/>
+                            
+                            
+                        </h:panelGrid>            
+                    </div>
+
+                <div>
+                    <p:commandButton icon="ui-icon-plusthick" value="Ingresar" 
+                                     actionListener="#{mbProducto.agregarProducto()}"
+                                     ajax="false"/>
+                    
+                    <h:link outcome="ListadoProducto" class="btn btn-primary" value="Ver mas producto"/>
+                  
+                </div>
+                </h:form>
+        
+       
+                    
+    </ui:define>
+
+</ui:composition>

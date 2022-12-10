@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./indexTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <!--NAVEGACION-->
+        <div class="bg-light py-3">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a class="a-fontcolor" href="indexTemplate.xhtml">Inicio</a> <span class="mx-2 mb-0">/</span> <a class="a-fontcolor" href="carrito.xhtml">Carrito</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Pagar</strong>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!--CONTENIDO-->
+        <div class="site-section">
+      
+            <div class="container">
+        
+                <div class="row">
+
+                    <div class="col-md-6 mb-5 mb-md-0">
+
+                    <h2 class="h3 mb-3 text-black">Informacion de envio</h2>
+
+                    <div class="p-3 p-lg-5 border">
+                        <h:form>
+
+                        <div class="form-group">
+                            <h:outputLabel for="" class="text-black">Ciudad <span class="text-danger">*</span></h:outputLabel>
+                            <h:selectOneMenu id="c_country" class="form-control">
+                  
+                                    <f:selectItem itemLabel="Quito"/>
+                                    <f:selectItem itemLabel="Guayaquil"/>
+                                    <f:selectItem itemLabel="Cuenca"/>
+                                    <f:selectItem itemLabel="Esmeralda"/>
+                                    <f:selectItem itemLabel="Manabi"/>
+                                    <f:selectItem itemLabel="Loja"/>                                    
+                                    <f:selectItem itemLabel="Ambato"/>
+                                    <f:selectItem itemLabel="Selecciona una ciudad"/>
+                                    
+                                </h:selectOneMenu>
+                            </div>
+              
+                            <div class="form-group row">
+                
+                                <div class="col-md-12">
+                                    <h:outputLabel class="text-black">Nombres completo <span class="text-danger">*</span></h:outputLabel>
+                                    <h:inputText class="form-control" />
+                                </div>
+                            </div>
+              
+                            <div class="form-group row">
+                
+                                <div class="col-md-12">
+                                    <h:outputLabel for="c_address" class="text-black">Direccion <span class="text-danger">*</span></h:outputLabel>
+                                    <h:inputText class="form-control" id="c_address" />
+                                </div>
+                            </div>
+              
+                            <div class="form-group row mb-5">
+
+                                <div class="col-md-6">
+                                  <h:outputLabel class="text-black">Codigo Postal<span class="text-danger">*</span></h:outputLabel>
+                                  <h:inputText class="form-control" id="c_email_address" />
+                                </div>
+
+                                <div class="col-md-6">
+                                  <h:outputLabel class="text-black">Celular <span class="text-danger">*</span></h:outputLabel>
+                                  <h:inputText class="form-control"/>
+                                </div>
+                            </div>
+                                          
+                            <div class="border p-3 mb-3">
+
+                                <h5><strong>METODO DE PAGO</strong></h5>
+                                    <div class="py-2">
+                                        <br/>
+                                        <h:selectOneRadio value="">
+                                                <f:selectItem itemValue="Red" itemLabel="Credito" />
+                                                <f:selectItem itemValue="Green" itemLabel="Debito" />
+                                        </h:selectOneRadio>
+                                       <br/> 
+                                        <div class="form-group row">
+                                                <div class="col-md-12">
+                                                <h:outputLabel  class="text-black">N° de tarjeta <span class="text-danger">*</span></h:outputLabel>
+                                                <h:inputText class="form-control" />
+                                              </div>
+                                            </div>
+                        
+                                            <div class="form-group row">
+
+                                            <div class="col-md-12">
+                                                <h:outputLabel for="" class="text-black">Fecha de caducidad <span class="text-danger">*</span></h:outputLabel>
+                                                <h:inputText class="form-control" />
+                                            </div>
+                                        </div>
+                        
+                                        <div class="form-group row">
+
+                                        <div class="col-md-12">
+                                            <h:outputLabel for="" class="text-black">Nombre del titular<span class="text-danger">*</span></h:outputLabel>
+                                            <h:inputText class="form-control" />
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                                                
+                            <h:button class="btn btn-secondary btn-sm" value="Guardar" onclick=""></h:button>
+                            
+                            </h:form>
+                          </div>
+                    </div>
+                    
+                  
+                    <div class="col-md-6">
+            
+                            <div class="row mb-5">
+
+                                <div class="col-md-12">
+
+                                    <h2 class="h3 mb-3 text-black">Resumen del pedido</h2>
+
+                                    <div class="p-3 p-lg-5 border">
+                                       <h:form>
+                                           <!--DATATABLE-->
+                                        <table class="table site-block-order-table mb-5">
+                                            <thead>
+                                                <tr>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                    
+                                            <tbody>
+                                                <tr>
+                                                    <td>Carrito Subtotal<strong class="mx-2" /></td>
+                                                    <td>$93.00</td>
+                                                </tr>
+                      
+                                                <tr>
+                                                    <td>Envio GRATIS<strong class="mx-2" /></td>
+                                                    <td>$0.00</td>
+                                                </tr>
+                      
+                                                <tr>
+
+                                                <td class="text-black font-weight-bold"><strong>I.V.A</strong></td>
+
+                                                <td class="text-black">$11.16</td>
+                                                </tr>
+
+                                                <tr>
+
+                                                <td class="text-black font-weight-bold"><strong>Orden Total</strong></td>
+
+                                                <td class="text-black font-weight-bold"><strong>$104.16</strong></td>
+                                                </tr>
+                                            </tbody>
+                                       </table>
+
+                  
+                                <div class="d-grid gap-2">
+                                    <p:commandButton class="btn btn-secondary" value="PAGAR" ></p:commandButton>
+                                </div>
+                                           
+                            </h:form>                                        
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                       
+                        
+                  </div>
+             </div>
+        </div>       
+    </ui:define>
+
+</ui:composition>
